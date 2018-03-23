@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.pnb.eato.DatabaseTraverser.TestTraverserService;
 import com.pnb.eato.Entities.Test;
+import com.pnb.eato.Request.RequestMappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,5 @@ public class GreetingController {
         Test test = new Test(123,"bond","kumarasamy");
         testTraverser.insert();
         return test;
-
     }
 }

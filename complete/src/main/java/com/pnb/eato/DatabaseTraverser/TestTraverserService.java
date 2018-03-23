@@ -16,11 +16,23 @@ public class TestTraverserService {
      @Autowired
      Connection connection;
 
-     public ResultSet insert() throws SQLException {
+     public ResultSet insert(String fname, String lname) throws SQLException {
           Statement st = connection.createStatement();
           ResultSet rs = st.executeQuery("INSERT INTO TEST" +
-                  "VALUES (0123,praiyon,yan)");
+                       "VALUES (" +
+                       fname+","+
+                       lname+
+                       ");"
+               );
           return rs;
+     }
+
+     public ResultSet delete(){
+          return null;
+     }
+
+     public ResultSet select(){
+          return null;
      }
 
 }

@@ -23,7 +23,7 @@ public class DatabaseService {
                   "(" + id + ",'" + name + "','" + type + "','" + url + "');";
 
           statement = connection.createStatement();
-          statement.executeQuery(sql);
+          statement.executeUpdate(sql);
 
      }
 

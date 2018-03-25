@@ -32,7 +32,7 @@ public class GreetingController {
     @GetMapping(value = "/greeting")
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         try {
-            databaseService.insertRestaurant(123, "restaur","food","www.abc.dasd");
+            databaseService.insertRestaurant(3, "restaur","food","www.abc.dasd");
         } catch (SQLException e) {
             e.printStackTrace();
         }

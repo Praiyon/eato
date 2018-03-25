@@ -12,4 +12,9 @@ public class HomeController {
 
     }
 
+//    @RequestMapping("/error")
+//    public void error(){
+//
+//    }
+
 }

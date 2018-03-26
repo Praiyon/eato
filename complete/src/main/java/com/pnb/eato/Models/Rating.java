@@ -4,33 +4,67 @@ import java.sql.Date;
 
 public class Rating {
 
-    private String userID;
+    private Integer userID;
     private Date date;
-    private Integer food;
-    private Integer price;
-    private Integer staff;
+    private double price;
+    private double food;
+    private double mood;
+    private double staff;
     private String comments;
     private Integer restaurantId;
 
-    public Rating(){}
-
-    public Rating(String userID, Date date, Integer food, Integer price, Integer staff, String comments, Integer restaurantId) {
+    public Rating(Integer userID, Date date, double price, double food, double mood, double staff, String comments, Integer restaurantId) {
         this.userID = userID;
         this.date = date;
-        this.food = food;
         this.price = price;
+        this.food = food;
+        this.mood = mood;
         this.staff = staff;
         this.comments = comments;
         this.restaurantId = restaurantId;
     }
 
-    public String getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getFood() {
+        return food;
+    }
+
+    public void setFood(double food) {
+        this.food = food;
+    }
+
+    public double getMood() {
+        return mood;
+    }
+
+    public void setMood(double mood) {
+        this.mood = mood;
+    }
+
+    public double getStaff() {
+        return staff;
+    }
+
+    public void setStaff(double staff) {
+        this.staff = staff;
+    }
+
+    public Rating(){}
 
     public Date getDate() {
         return date;
@@ -38,30 +72,6 @@ public class Rating {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Integer getFood() {
-        return food;
-    }
-
-    public void setFood(Integer food) {
-        this.food = food;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public void setPrice(Integer price) {
-        this.price = price;
-    }
-
-    public Integer getStaff() {
-        return staff;
-    }
-
-    public void setStaff(Integer staff) {
-        this.staff = staff;
     }
 
     public String getComments() {

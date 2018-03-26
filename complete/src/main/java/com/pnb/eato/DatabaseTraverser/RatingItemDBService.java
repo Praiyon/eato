@@ -32,7 +32,8 @@ public class RatingItemDBService {
     }
 
     public void insert(int userId, Date date, int itemId, int rating, String comment) throws SQLException {
-        String sql = "INSERT INTO RATING_ITEM VALUES(" +
+        String sql = "INSERT INTO RATING_ITEM (userid, date, itemid, rating, comment)" +
+                "VALUES(" +
                 userId +","+
                 "to_date('"+date.toString()+"',"+
                 itemId+","+

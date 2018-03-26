@@ -65,8 +65,10 @@ public class LocationDBService {
 
     public void insert(Date firstOpenId, String managerName, int phoneNumber, String streetAddress, int restaurantId) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO Location VALUES(" +
-                "to_date('"+firstOpenId.toString()+"'),"+
+        statement.executeUpdate("INSERT INTO Location " +
+                "(first_open_id, manager_name, phone_number, street_address, restaurantid)" +
+                "VALUES(" +
+                "to_date('" +firstOpenId.toString() + "','YYYY MM DD')" +
                 "'"+managerName+"',"+
                 phoneNumber+","+
                 "'"+streetAddress+"',"+

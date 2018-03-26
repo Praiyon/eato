@@ -30,21 +30,27 @@ public class RestaurantDBService {
      public List<Restaurant> queryByType(String type) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
           sql += "type = '"+type+"';";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public List<Restaurant>queryByNameAndType(String name, String type) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
           sql += "name = '"+name +"' AND type = '" +type  +"'";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public List<Restaurant> queryByName(String name) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
                sql += "name = '"+name +"';";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
-     private List<Restaurant> getResultSet(String sql) throws SQLException {
+
+     public List<Restaurant> getAllRestaurants() throws SQLException {
+          String sql = "SELECT * FROM RESTAURANT";
+          return getObjectList(sql);
+     }
+
+     private List<Restaurant> getObjectList(String sql) throws SQLException {
           List<Restaurant> restaurantList = new ArrayList<>();
           Statement statement = connection.createStatement();
           ResultSet rs = statement.executeQuery(sql);

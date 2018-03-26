@@ -3,17 +3,16 @@ package com.pnb.eato.hello;
 import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.pnb.eato.DatabaseTraverser.DatabaseService;
-import com.pnb.eato.hello.Greeting;
-import org.json.JSONException;
-import org.json.JSONObject;
+
+import com.pnb.eato.DatabaseTraverser.RestaurantDBService;
+import com.pnb.eato.Models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GreetingController {
     @Autowired
-    DatabaseService databaseService;
+    RestaurantDBService restaurantDBService;
     private static final String template = "<h1 color='green'>Hello, %s!</h1>";
     private final AtomicLong counter = new AtomicLong();
 
@@ -30,14 +29,20 @@ public class GreetingController {
     //}
 
     @GetMapping(value = "/greeting")
-    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public void greeting(@RequestParam(value="name", defaultValue="World") String name) {
         try {
-            databaseService.insertRestaurant(3, "restaur","food","www.abc.dasd");
+            restaurantDBService.insertRestaurant("test","test","test");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Greeting(counter.incrementAndGet(),
-                String.format(template, name));
+//        Restaurant restaurant;
+//        try {
+//            restaurant = restaurantDBService.queryByName("a").stream().findAny().orElse(null);
+//        } catch (SQLException e) {
+//            restaurant = null;
+//            e.printStackTrace();
+//        }
+//        return restaurant;
     }
 
 

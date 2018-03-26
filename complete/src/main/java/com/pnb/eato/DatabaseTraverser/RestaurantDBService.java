@@ -27,6 +27,11 @@ public class RestaurantDBService {
 
      }
 
+     public List<Restaurant> queryById(int id) throws SQLException{
+          String sql = "SELECT * FROM RESTAURANT WHERE ";
+          sql += "id="+id+";";
+          return getObjectList(sql);
+     }
      public List<Restaurant> queryByType(String type) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
           sql += "type = '"+type+"';";
@@ -46,7 +51,7 @@ public class RestaurantDBService {
      }
 
      public List<Restaurant> getAllRestaurants() throws SQLException {
-          String sql = "SELECT * FROM RESTAURANT";
+          String sql = "SELECT * FROM RESTAURANT;";
           return getObjectList(sql);
      }
 

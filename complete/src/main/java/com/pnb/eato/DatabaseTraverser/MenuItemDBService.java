@@ -36,7 +36,9 @@ public class MenuItemDBService {
     }
 
     public void insert(String name, String type, String category, String description, double price, int restaurantId) throws SQLException {
-        String sql = "INSERT INTO  MenuItem VALUES(" +
+        String sql = "INSERT INTO  MenuItem " +
+                "(name, type, category, description, price, restaurantid) " +
+                "VALUES(" +
                 "'"+name+"'," +
                 "'"+category+"'," +
                 "'"+description+"'," +

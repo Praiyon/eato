@@ -3,25 +3,35 @@ package com.pnb.eato.Models;
 import java.sql.Date;
 
 public class RatingItem {
-    private String userId;
+    private Integer userId;
     private Date date;
     private Integer itemId;
+    private int rating;
 
     public RatingItem(){}
 
-    public RatingItem(String userId, Date date, Integer itemId, String comment) {
+    public RatingItem(Integer userId, Date date, Integer itemId, int rating, String comment) {
         this.userId = userId;
         this.date = date;
         this.itemId = itemId;
+        this.rating = rating;
         this.comment = comment;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public Date getDate() {

@@ -8,14 +8,34 @@ public class Location {
     private Date firstOpenDate;
     private String managerName;
     private int phoneNumber;
+    private String streetAddress;
+    private int restaurantId;
 
     public Location(){}
 
-    public Location(int locationId, Date firstOpenDate, String managerName, int phoneNumber) {
+    public Location(int locationId, Date firstOpenDate, String managerName, int phoneNumber, String streetAddress, int restaurantId) {
         this.locationId = locationId;
         this.firstOpenDate = firstOpenDate;
         this.managerName = managerName;
         this.phoneNumber = phoneNumber;
+        this.streetAddress = streetAddress;
+        this.restaurantId = restaurantId;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public int getLocationId() {

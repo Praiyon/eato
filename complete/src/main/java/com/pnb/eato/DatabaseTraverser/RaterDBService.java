@@ -28,7 +28,14 @@ public class RaterDBService {
 
      public List<Rater> queryByName(String name) throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
-          sql += "USERNAME = '"+name+"';";
+          sql += "name = '"+name+"';";
+          return getResultSet(sql);
+     }
+
+
+     public List<Rater> queryByUsername(String username)  throws SQLException {
+          String sql = "SELECT * FROM RATER WHERE ";
+          sql += "username = '"+username+"';";
           return getResultSet(sql);
      }
      private List<Rater> getResultSet(String sql) throws SQLException {

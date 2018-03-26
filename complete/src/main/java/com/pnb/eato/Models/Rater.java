@@ -4,31 +4,34 @@ import java.sql.Date;
 
 public class Rater {
 
-    private String userId;
+    private Integer userId;
     private String email;
     private String name;
     private Date joinDate;
     private Integer rating;
     private String password;
     private String username;
+    private Integer reputation;
+    private String type;
 
     public Rater(){}
 
-    public Rater(String userId, String email, String name, Date joinDate, Integer rating, String username, String password) {
+    public Rater(Integer userId, String email, String name, Date joinDate, String type, String username, String password, Integer reputation) {
         this.userId = userId;
         this.email = email;
         this.name = name;
         this.joinDate = joinDate;
-        this.rating = rating;
-        this.password = password;
+        this.type = type;
         this.username = username;
+        this.password = password;
+        this.reputation = reputation;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

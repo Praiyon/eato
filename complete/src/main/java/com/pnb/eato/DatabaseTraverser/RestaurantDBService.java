@@ -19,7 +19,7 @@ public class RestaurantDBService {
      public void insertRestaurant (String name,
                                    String type,
                                    String url ) throws SQLException {
-          String sql = "INSERT INTO RESTAURANT VALUES " +
+          String sql = "INSERT INTO RESTAURANT (NAME, TYPE, URL) VALUES " +
                   "('" + name + "','" + type + "','" + url + "');";
           Statement statement;
           statement = connection.createStatement();
@@ -29,19 +29,19 @@ public class RestaurantDBService {
 
      public List<Restaurant> queryByType(String type) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
-          sql += "type = ''"+type+"';";
+          sql += "type = '"+type+"';";
           return getResultSet(sql);
      }
 
      public List<Restaurant>queryByNameAndType(String name, String type) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
-          sql += "name = ''"+name +"' AND type = '" +type  +"'";
+          sql += "name = '"+name +"' AND type = '" +type  +"'";
           return getResultSet(sql);
      }
 
      public List<Restaurant> queryByName(String name) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
-               sql += "name = ''"+name +"';";
+               sql += "name = '"+name +"';";
           return getResultSet(sql);
      }
      private List<Restaurant> getResultSet(String sql) throws SQLException {

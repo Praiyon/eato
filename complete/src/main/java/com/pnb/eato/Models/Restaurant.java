@@ -6,14 +6,18 @@ public class Restaurant {
     private String name;
     private String type;
     private String url;
+    private String urlPic;
+    private String urlLogo;
 
     public Restaurant(){}
 
-    public Restaurant(Integer restaurantId, String name, String type, String url) {
+    public Restaurant(Integer restaurantId, String name, String type, String url, String urlPic, String urlLogo) {
         this.restaurantId = restaurantId;
         this.name = name;
         this.type = type;
         this.url = url;
+        this.urlPic = urlPic;
+        this.urlLogo = urlLogo;
     }
 
     public Integer getRestaurantId() {
@@ -46,5 +50,21 @@ public class Restaurant {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUrlPic() {
+        return urlPic;
+    }
+
+    public void setUrlPic(String urlPic) {
+        this.urlPic = urlPic;
+    }
+
+    public String getUrlLogo() {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo) {
+        this.urlLogo = urlLogo;
     }
 }

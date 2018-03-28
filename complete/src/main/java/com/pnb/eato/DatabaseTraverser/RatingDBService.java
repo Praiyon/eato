@@ -14,11 +14,39 @@ public class RatingDBService {
     @Autowired
     Connection con;
 
+    public float getPriceOfRestaurant(int restaurantId) throws SQLException {
+        String sql = "select avg(price) from rating where restaurantId=" + restaurantId +";";
+        return getAverage(sql);
+    }
+
+    public float getFoodOfRestaurant(int restaurantId) throws SQLException {
+        String sql = "select avg(food) from rating where restaurantId=" + restaurantId +";";
+        return getAverage(sql);
+    }
+
+    public float getMoodOfRestaurant(int restaurantId) throws SQLException {
+        String sql = "select avg(mood) from rating where restaurantId=" + restaurantId +";";
+        return getAverage(sql);
+    }
+
+    public float getStaffOfRestaurant(int restaurantId) throws SQLException {
+        String sql = "select avg(staff) from rating where restaurantId=" + restaurantId +";";
+        return getAverage(sql);
+    }
+
+    private float getAverage(String sql) throws SQLException {
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) {
+            return rs.getFloat(1);
+        }
+        return 0;
+    }
+
     private List<Rating> getObjectList (String sql) throws SQLException {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Rating> ratingList = new ArrayList<>();
-
         while(rs.next()){
             int userId = rs.getInt("USERID");
             Date date = rs.getDate("DATE");

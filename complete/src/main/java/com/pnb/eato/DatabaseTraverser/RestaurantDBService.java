@@ -65,8 +65,10 @@ public class RestaurantDBService {
                String rName = rs.getString("Name");
                String type = rs.getString("Type");
                String URL = rs.getString("URL");
+               String food_pic = rs.getString("food_pic");
+               String url_logo = rs.getString("logo");
                restaurantList
-                       .add(new Restaurant(restId, rName, type, URL));
+                       .add(new Restaurant(restId, rName, type, URL, food_pic, url_logo));
 
           }
           return restaurantList;

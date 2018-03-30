@@ -10,25 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.ValidationException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.time.Instant;
 
 @RestController
 public class RaterController {
 
      @Autowired
      RaterDBService raterDBService;
-     @GetMapping(value = RequestMappings.LOGIN)
-     public Rater rating(@RequestParam(value="raterId", required = true) String raterId) {
-          Rater rater;
-          try {
-               rater = raterDBService.queryByName(raterId).stream().findAny().orElse(null);
-
-          } catch (SQLException e) {
-               rater = null;
-               e.printStackTrace();
-          }
-          return rater;
-     }
 
      @RequestMapping(value = RequestMappings.LOGIN ,method=RequestMethod.POST)
      public Login login(HttpServletRequest request, @RequestBody Login user) throws SQLException, ValidationException {
@@ -48,14 +38,45 @@ public class RaterController {
           }
      }
 
-     @RequestMapping(value="/session", method = RequestMethod.GET)
-     public Object testPost(HttpServletRequest request) throws ValidationException {
-          if (request.getAttribute("uid") == null){
-               throw new ValidationException("not logged in");
-          } else {
-               return(request.getAttribute("uid"));
+     @RequestMapping(value=RequestMappings.SIGNUP, method = RequestMethod.GET)
+     public void signup(){}
+
+     @RequestMapping(value=RequestMappings.SIGNUP, method = RequestMethod.POST)
+     public Rater signupPOST(@RequestBody Rater newUser) throws SQLException, ValidationException {
+          /*
+               {
+                    "uid": "-1",
+                    "email": "testingThe@SignUp.Postman",
+                    "name": "bondTEST",
+                    "joinDate": null,
+                    "password": "password123",
+                    "username": "bonduser",
+                    "reputation": -1,
+                    "type": "casual user"
+               }
+          * */
+          boolean validUser = raterDBService.queryByUsername(newUser.getUsername()).size() == 0;
+          boolean validEmail = raterDBService.queryByEmail(newUser.getEmail()).size()== 0;
+
+          //if they do not ex
+          if (!validUser){
+               throw new ValidationException("Username already exists");
           }
+
+          if (!validEmail) {
+               throw new ValidationException("Email already exists");
+          }
+          newUser.setReputation(0);
+          raterDBService.insert(newUser);
+          return newUser;
      }
 
-
+     @RequestMapping(value="/uli", method = RequestMethod.GET)
+     public int testPost(HttpServletRequest request) throws ValidationException {
+          if (request.getAttribute("uid") == null){
+               return -1;
+          } else {
+               return((int) request.getAttribute("uid"));
+          }
+     }
 }

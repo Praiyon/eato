@@ -7,11 +7,11 @@ public class RequestMappings {
 
 //    AUTH CONTROLLER
     public static final String AUTH = INDEX + "auth/";
-    public static final String REG = AUTH + "register/";
     public static final String LOGIN = AUTH + "login/";
     public static final String LOGOUT = AUTH + "logout/";
+    public static final String SIGNUP = AUTH + "signup/";
 
-//    BROWSE CONTROLLER
+    //    BROWSE CONTROLLER
     public static final String BROWSE = INDEX +"browse/";
 
 //    RESTAURANT CONTROLLER

@@ -32,12 +32,32 @@ public class RaterDBService {
           return getResultSet(sql);
      }
 
+     public List<Rater> queryByEmail(String email)  throws SQLException {
+          String sql = "SELECT * FROM RATER WHERE ";
+          sql += "email = '"+email+"';";
+          return getResultSet(sql);
+     }
 
      public List<Rater> queryByUsername(String username)  throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
           sql += "username = '"+username+"';";
           return getResultSet(sql);
      }
+
+     public void insert(Rater toInsert) throws SQLException {
+          String sql = "INSERT INTO RATER (EMAIL, NAME, TYPE, JOIN_DATE, PASSWORD, USERNAME, REPUTATION) VALUES (";
+          sql += "'"+ toInsert.getEmail() +"'," +
+                 "'"+ toInsert.getName() +"', " +
+                 "'"+ toInsert.getType() +"', " +
+                 "CURRENT_DATE,"+
+                 "'"+ toInsert.getPassword() +"', " +
+                 "'"+ toInsert.getUsername() +"', " +
+                 toInsert.getReputation()+
+                  ");";
+          Statement st = connection.createStatement();
+          st.executeUpdate(sql);
+     }
+
      private List<Rater> getResultSet(String sql) throws SQLException {
           List<Rater> raterList = new ArrayList<>();
           Statement statement = connection.createStatement();

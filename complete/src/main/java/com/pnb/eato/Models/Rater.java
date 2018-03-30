@@ -8,7 +8,6 @@ public class Rater {
     private String email;
     private String name;
     private Date joinDate;
-    private Integer rating;
     private String password;
     private String username;
     private Integer reputation;
@@ -59,14 +58,6 @@ public class Rater {
         this.joinDate = joinDate;
     }
 
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -83,4 +74,19 @@ public class Rater {
         this.username = username;
     }
 
+    public Integer getReputation() {
+        return reputation;
+    }
+
+    public void setReputation(Integer reputation) {
+        this.reputation = reputation;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

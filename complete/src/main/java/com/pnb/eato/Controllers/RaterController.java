@@ -31,7 +31,7 @@ public class RaterController {
 
           if (StringUtils.equals(user.getPassword(), loginAttempt.getPassword())){
                //login successful
-               request.setAttribute("uid", loginAttempt.getUserId());
+                    request.setAttribute("uid", loginAttempt.getUserId());
                return user;
           } else {
                throw new ValidationException("Username or Password is incorrect");

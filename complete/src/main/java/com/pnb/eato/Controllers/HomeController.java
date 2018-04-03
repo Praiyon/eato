@@ -23,24 +23,4 @@ public class HomeController {
 
     @Autowired
     RatingDBService ratingService;
-
-    @RequestMapping(value = RequestMappings.INDEX, method = RequestMethod.GET)
-    public List<RestaurantCard> homepage() throws SQLException {
-        List<Restaurant> restaurantList = restService.getAllRestaurants();
-        List<RestaurantCard> restCardList = new ArrayList<>();
-        restaurantList.stream().forEach(r -> {
-            try {
-                restCardList.add(new RestaurantCard(
-                        r.getName(),
-                        r.getRestaurantId(),
-                        ratingService.getFoodOfRestaurant(r.getRestaurantId()),
-                        ratingService.getPriceOfRestaurant(r.getRestaurantId()),
-                        r.getUrlPic())
-                );
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
-        return restCardList;
-    }
 }

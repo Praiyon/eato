@@ -47,6 +47,8 @@ public class RestaurantController {
                             r.getRestaurantId(),
                             ratingService.getFoodOfRestaurant(r.getRestaurantId()),
                             ratingService.getPriceOfRestaurant(r.getRestaurantId()),
+                            ratingService.getMoodOfRestaurant(r.getRestaurantId()),
+                            ratingService.getStaffOfRestaurant(r.getRestaurantId()),
                             r.getUrlPic())
                     );
                 } catch (SQLException e) {
@@ -65,6 +67,8 @@ public class RestaurantController {
                             r.getRestaurantId(),
                             ratingService.getFoodOfRestaurant(r.getRestaurantId()),
                             ratingService.getPriceOfRestaurant(r.getRestaurantId()),
+                            ratingService.getMoodOfRestaurant(r.getRestaurantId()),
+                            ratingService.getStaffOfRestaurant(r.getRestaurantId()),
                             r.getUrlPic())
                     );
                 } catch (SQLException e) {

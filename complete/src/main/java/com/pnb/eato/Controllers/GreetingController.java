@@ -37,7 +37,7 @@ public class GreetingController {
         }
 //        Restaurant restaurant;
 //        try {
-//            restaurant = restaurantDBService.queryByName("a").stream().findAny().orElse(null);
+//            restaurant = restaurantDBService.queryByLikeName("a").stream().findAny().orElse(null);
 //        } catch (SQLException e) {
 //            restaurant = null;
 //            e.printStackTrace();

@@ -44,7 +44,7 @@ public class RestaurantDBService {
           return getObjectList(sql);
      }
 
-     public List<Restaurant> queryByName(String name) throws SQLException {
+     public List<Restaurant> queryByLikeName(String name) throws SQLException {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
           String[] likeWords = name.split(" ");
           for (int i = 0 ; i < likeWords.length; i++){

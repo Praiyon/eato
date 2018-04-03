@@ -21,7 +21,7 @@ public class RaterController {
      RaterDBService raterDBService;
 
      @RequestMapping(value = RequestMappings.LOGIN ,method=RequestMethod.POST)
-     public Login login(HttpServletRequest request, @RequestBody Login user) throws SQLException, ValidationException {
+     public int login(@RequestBody Login user) throws SQLException, ValidationException {
 
           Rater loginAttempt = raterDBService.queryByUsername(user.getUsername()).stream().findFirst().orElse(null);
 
@@ -31,8 +31,7 @@ public class RaterController {
 
           if (StringUtils.equals(user.getPassword(), loginAttempt.getPassword())){
                //login successful
-                    request.setAttribute("uid", loginAttempt.getUserId());
-               return user;
+               return loginAttempt.getUserId();
           } else {
                throw new ValidationException("Username or Password is incorrect");
           }

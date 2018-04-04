@@ -43,6 +43,11 @@ public class RatingDBService {
         return 0;
     }
 
+    public List<Rating> getAllRatingsOfRestaurant(int restId) throws SQLException {
+        String sql = "select * from rating where restaurantId=" +restId+";";
+        return getObjectList(sql);
+    }
+
     private List<Rating> getObjectList (String sql) throws SQLException {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);

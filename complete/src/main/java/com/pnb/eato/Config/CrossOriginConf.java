@@ -16,7 +16,7 @@ public class CrossOriginConf implements WebMvcConfigurer{
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
         registry.addMapping(RequestMappings.LOGIN);
-        registry.addMapping(RequestMappings.SIGNUP); 
+        registry.addMapping(RequestMappings.SIGNUP);
         registry.addMapping(RequestMappings.RATE);
     }
 }

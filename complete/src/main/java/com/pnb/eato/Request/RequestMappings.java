@@ -19,4 +19,5 @@ public class RequestMappings {
     public static final String MENU = RESTAU+ "menu/";
 
 
+    public static final String RATE = "rate/";
 }

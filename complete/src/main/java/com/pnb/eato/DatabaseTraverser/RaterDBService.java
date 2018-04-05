@@ -14,14 +14,26 @@ public class RaterDBService {
      @Autowired
      Connection connection;
 
-     public List<Rater> queryByUserId(String userId) throws SQLException {
-          String sql = "SELECT * FROM RATER WHERE ";
-          sql += "USERID = '"+userId+"';";
-          return getResultSet(sql);
+     public int getRepById(int id) throws SQLException {
+          String sql ="select * from rater where userid="+id+";";
+          Rater rater = getResultSet(sql).stream().findFirst().orElse(null);
+          if (rater != null){
+               return rater.getReputation();
+          }
+          return -1000;
+     }
+
+     public String getUsernameById(int id) throws SQLException {
+          String sql ="select * from rater where userid="+id+";";
+          Rater rater = getResultSet(sql).stream().findFirst().orElse(null);
+          if (rater != null){
+               return rater.getUsername();
+          }
+          return null;
      }
 
      public List<Rater>queryByNameAndType(String name, String type) throws SQLException {
-          String sql = "SELECT * FROM RESTAURANT WHERE ";
+          String sql = "SELECT * FROM RATER WHERE ";
           sql += "name = '"+name +"' AND type = '" +type  +"'";
           return getResultSet(sql);
      }

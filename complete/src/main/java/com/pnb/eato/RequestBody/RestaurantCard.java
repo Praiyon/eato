@@ -9,8 +9,9 @@ public class RestaurantCard {
     private float moodRating;
     private float staffRating;
     private String picUrl;
+    private String logoUrl;
 
-    public RestaurantCard(String name, int restaurantId, float foodRating, float priceRating, float moodRating, float staffRating, String picUrl) {
+    public RestaurantCard(String name, int restaurantId, float foodRating, float priceRating, float moodRating, float staffRating, String picUrl, String logoUrl) {
         this.name = name;
         this.restaurantId = restaurantId;
         this.foodRating = foodRating;
@@ -18,6 +19,7 @@ public class RestaurantCard {
         this.moodRating = moodRating;
         this.staffRating = staffRating;
         this.picUrl = picUrl;
+        this.logoUrl = logoUrl;
     }
 
     public RestaurantCard() {
@@ -78,5 +80,13 @@ public class RestaurantCard {
 
     public void setPriceRating(float priceRating) {
         this.priceRating = priceRating;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 }

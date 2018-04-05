@@ -25,8 +25,8 @@ public class RestaurantController {
     @Autowired
     private RatingDBService ratingService;
 
-//    @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.GET)
-//    public Restaurant restaurantGet(@RequestParam("restId") int restId) throws SQLException, ValidationException {
+//    @RequestMapping(value= RequestMappings.RESTAU+"", method= RequestMethod.GET)
+//    public Restaurant restaurantGet(@RequestParam(value = "id") int restId) throws SQLException, ValidationException {
 //        Restaurant restaurant = restauService.queryById(restId).stream().findFirst().orElse(null);
 //        if (restaurant == null){
 //            throw new ValidationException("oh no!");
@@ -35,28 +35,28 @@ public class RestaurantController {
 //    }
 
     @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.GET)
-    public List<RestaurantCard> restaurantGetByName(@RequestParam(value = "name", required = false) String name) throws SQLException, ValidationException {
+    public List<RestaurantCard> restaurantGetByName(@RequestParam(value = "name", required = false) String name,
+                                                    @RequestParam(value = "id", required = false) Integer id) throws SQLException, ValidationException {
         List<Restaurant> restaurants;
         List<RestaurantCard> restCardList = new ArrayList<>();
-        if(name == null){
-            restaurants = restauService.getAllRestaurants();
-            restaurants.stream().forEach(r -> {
-                try {
-                    restCardList.add(new RestaurantCard(
-                            r.getName(),
-                            r.getRestaurantId(),
-                            ratingService.getFoodOfRestaurant(r.getRestaurantId()),
-                            ratingService.getPriceOfRestaurant(r.getRestaurantId()),
-                            ratingService.getMoodOfRestaurant(r.getRestaurantId()),
-                            ratingService.getStaffOfRestaurant(r.getRestaurantId()),
-                            r.getUrlPic())
+        if(id != null){
+            Restaurant restaurant = restauService.queryById(id).stream().findFirst().orElse(null);
+            RestaurantCard card = new RestaurantCard(
+                    restaurant.getName(),
+                    restaurant.getRestaurantId(),
+                    ratingService.getFoodOfRestaurant(id),
+                    ratingService.getPriceOfRestaurant(id),
+                    ratingService.getMoodOfRestaurant(id),
+                    ratingService.getStaffOfRestaurant(id),
+                    restaurant.getUrlPic(),
+                    restaurant.getUrlLogo()
                     );
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
-        }else{
-            restaurants = restauService.queryByLikeName(name);
+            restCardList.add(card);
+
+        }else {
+            restaurants = name == null ?
+                    restauService.getAllRestaurants()
+                    : restauService.queryByLikeName(name);
             if (restaurants == null){
                 throw new ValidationException("oh no!");
             }
@@ -69,7 +69,8 @@ public class RestaurantController {
                             ratingService.getPriceOfRestaurant(r.getRestaurantId()),
                             ratingService.getMoodOfRestaurant(r.getRestaurantId()),
                             ratingService.getStaffOfRestaurant(r.getRestaurantId()),
-                            r.getUrlPic())
+                            r.getUrlPic(),
+                            r.getUrlLogo())
                     );
                 } catch (SQLException e) {
                     e.printStackTrace();

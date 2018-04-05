@@ -1,6 +1,7 @@
 package com.pnb.eato.DatabaseTraverser;
 
 import com.pnb.eato.Models.Rater;
+import com.pnb.eato.Models.Rating;
 import com.pnb.eato.Models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,18 @@ import java.util.List;
 public class RaterDBService {
      @Autowired
      Connection connection;
+
+     public void upvoteByPK(int restauid, int raterid) throws SQLException {
+          String sqlGetRep = "select * from rater where restaurantId="+restauid+ " and raterid="+raterid+";";
+          Rater rater = getResultSet(sqlGetRep).stream().findAny().orElse(null);
+          int newRep = rater.getReputation() + 1;
+          if (newRep>99){
+               return;
+          }
+          String updateSQL = "update rater set reputation = "+ newRep + "where restaurantid="+restauid + " and raterid="+raterid+";";
+          Statement st = connection.createStatement();
+          st.executeUpdate(updateSQL);
+     }
 
      public int getRepById(int id) throws SQLException {
           String sql ="select * from rater where userid="+id+";";

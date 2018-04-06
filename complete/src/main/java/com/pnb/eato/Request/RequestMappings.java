@@ -7,6 +7,7 @@ public class RequestMappings {
 
 //    AUTH CONTROLLER
     public static final String AUTH = INDEX + "auth/";
+    public static final String LOCATION = INDEX + "location/";
     public static final String LOGIN = AUTH + "login/";
     public static final String LOGOUT = AUTH + "logout/";
     public static final String SIGNUP = AUTH + "signup/";

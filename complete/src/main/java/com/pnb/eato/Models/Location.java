@@ -5,15 +5,15 @@ import java.sql.Date;
 public class Location {
 
     private int locationId;
-    private Date firstOpenDate;
+    private String firstOpenDate;
     private String managerName;
-    private int phoneNumber;
+    private String phoneNumber;
     private String streetAddress;
     private int restaurantId;
 
     public Location(){}
 
-    public Location(int locationId, Date firstOpenDate, String managerName, int phoneNumber, String streetAddress, int restaurantId) {
+    public Location(int locationId, String firstOpenDate, String managerName, String phoneNumber, String streetAddress, int restaurantId) {
         this.locationId = locationId;
         this.firstOpenDate = firstOpenDate;
         this.managerName = managerName;
@@ -46,11 +46,11 @@ public class Location {
         this.locationId = locationId;
     }
 
-    public Date getFirstOpenDate() {
+    public String getFirstOpenDate() {
         return firstOpenDate;
     }
 
-    public void setFirstOpenDate(Date firstOpenDate) {
+    public void setFirstOpenDate(String firstOpenDate) {
         this.firstOpenDate = firstOpenDate;
     }
 
@@ -62,11 +62,11 @@ public class Location {
         this.managerName = managerName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }

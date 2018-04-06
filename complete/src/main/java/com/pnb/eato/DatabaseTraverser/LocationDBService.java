@@ -4,6 +4,7 @@ import com.pnb.eato.Models.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,9 @@ public class LocationDBService {
 
         while (rs.next()){
             int locationID = rs.getInt("LocationID");
-            Date firstOpenId = rs.getDate("first_open_id");
+            String firstOpenId = rs.getDate("first_open_id").toString();
             String managerName = rs.getString("manager_name");
-            int phoneNumber = rs.getInt("phone_number");
+            String phoneNumber = rs.getString("phone_number");
             String streetAddress = rs.getString("street_address");
             int restaurantId = rs.getInt("restaurantId");
             locationList.add(new Location(locationID, firstOpenId, managerName, phoneNumber, streetAddress, restaurantId));

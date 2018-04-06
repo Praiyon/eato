@@ -76,6 +76,7 @@ public class RatingDBService {
                 food + ","+
                 mood + ","+
                 staff + ","+
+                comments+","+
                 restaurantId+
                 ");";
         Statement st = con.createStatement();

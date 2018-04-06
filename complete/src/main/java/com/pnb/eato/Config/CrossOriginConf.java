@@ -14,9 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class CrossOriginConf implements WebMvcConfigurer{
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
         registry.addMapping(RequestMappings.LOGIN);
+        registry.addMapping("/**");
         registry.addMapping(RequestMappings.SIGNUP);
         registry.addMapping(RequestMappings.RATE);
+        registry.addMapping("/upvote-rater/");
+        registry.addMapping("/downvote-rater/");
     }
 }

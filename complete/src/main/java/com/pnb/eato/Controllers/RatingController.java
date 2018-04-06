@@ -24,6 +24,11 @@ public class RatingController {
     @Autowired
     RatingDBService ratingDBService;
 
+    @RequestMapping(value="/upvote-rater", method=RequestMethod.GET)
+    public void upvote(@RequestParam(value ="restid") int restauId, @RequestParam(value ="raterid") int raterId) throws SQLException {
+        raterService.upvoteByPK(restauId, raterId);
+    }
+
     @RequestMapping(value=RequestMappings.RATE, method= RequestMethod.GET)
     public List<RatingDisplay> rate(@RequestParam(value = "restid", required = false) int restId) throws SQLException {
         List<Rating> ratingList = ratingDBService.getAllRatingsOfRestaurant(restId);

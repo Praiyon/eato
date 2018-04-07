@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicLong;
 
 
+import com.pnb.eato.DatabaseTraverser.ExtraQueryService;
 import com.pnb.eato.DatabaseTraverser.RestaurantDBService;
 import com.pnb.eato.Models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GreetingController {
-    @Autowired
-    RestaurantDBService restaurantDBService;
+//    @Autowired
+//    RestaurantDBService restaurantDBService;
+
+//    @Autowired
+//    ExtraQueryService extraQueryService;
     private static final String template = "<h1 color='green'>Hello, %s!</h1>";
     private final AtomicLong counter = new AtomicLong();
 
@@ -29,12 +33,14 @@ public class GreetingController {
     //}
 
     @GetMapping(value = "/greeting")
-    public void greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        try {
-            restaurantDBService.insertRestaurant("test","test","test");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void greeting(@RequestParam(value="name", defaultValue="World") String name) throws SQLException {
+//        try {
+//            restaurantDBService.insertRestaurant("test","test","test");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        extraQueryService.getTotalRatingRest();
 //        Restaurant restaurant;
 //        try {
 //            restaurant = restaurantDBService.queryByLikeName("a").stream().findAny().orElse(null);

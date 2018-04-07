@@ -15,21 +15,28 @@ public class RaterDBService {
 
      //this is question k
      public List<Rater> getHighestRatersFoodAndMood() throws SQLException {
-          String sql = "select rater.* " +
-                  "from rater, rating " +
-                  "where rater.userid = rating.userid " +
-                  "order by (food + mood) desc " +
-                  "limit 10;";
+          String sql = "select distinct * " +
+                  "from rater " +
+                  "where userid in (" +
+                  "    select userid" +
+                  "    from rating" +
+                  "    order by (food + mood) desc" +
+                  "    limit 10" +
+                  ");";
           return getObjectList(sql);
      }
 
      //this is question l
      public List<Rater> getHighestRatersFoodOrMood() throws SQLException {
-          String sql = "select rater.* " +
-                  "from rater, rating " +
-                  "where rater.userid = rating.userid " +
-                  "order by greatest(food,mood) desc " +
-                  "limit 10";
+          String sql = "select * " +
+                  "from rater " +
+                  "where rater.userid in (" +
+                  "select rater2.userid" +
+                  "    from rater as rater2, rating" +
+                  "    where rater2.userid = rating.userid" +
+                  "    order by greatest(food,mood) desc" +
+                  "    limit 10" +
+                  ");";
           return getObjectList(sql);
      }
 
@@ -50,51 +57,56 @@ public class RaterDBService {
 
      //question o
      public List<Rater> polarizingRaters() throws SQLException {
-          String sql = "select rater.* " +
-                  "from rater, rating " +
-                  "where rater.userid = rating.userid " +
-                  "order by @(food - mood) desc " +
-                  "limit 10;";
-          return getObjectList(sql);
-     }
-
-     //question n
-     public List<Rater> ratersLowerAverageThanX(String name) throws SQLException {
-          String sql = "select rater1.* " +
-                  "from rater as rater1 " +
-                  "join rating as rating1 " +
-                  "on rating1.userid = rater1.userid " +
-                  "where rating1.food + rating1.mood + rating1.price + rating1.staff < " +
-                  "(" +
-                  "select avg(rating2.food + rating2.mood + rating2.price + rating2.staff) " +
-                  "from rater as rater2 " +
-                  "join rating as rating2 " +
-                  "on rating2.userid = rater2.userid " +
-                  "where rater2.name='"+name+"'" +
+          String sql = "select * " +
+                  "from rater " +
+                  "where userid in ( " +
+                  "select userid" +
+                  "    from rating" +
+                  "    group by userid" +
+                  "    order by greatest(max(price), max(food), max(mood), max(staff))-least(min(price), min(food), min(mood), min(staff)) desc" +
+                  "    limit 10" +
                   ");";
           return getObjectList(sql);
      }
 
-     public void upvoteByPK(int restauid, int raterid) throws SQLException {
-          String sqlGetRep = "select * from rater where restaurantId="+restauid+ " and raterid="+raterid+";";
+     //question n
+     public List<Rater> ratersLowerThanX(String name) throws SQLException {
+          String sql = "select * from rater " +
+                  "where userid in (" +
+                  "    select rating.userid" +
+                  "    from rating" +
+                  "    where rating.food + rating.mood + rating.price + rating.staff < (" +
+                  "        select max(rating2.food + rating2.mood + rating2.price + rating2.staff)" +
+                  "        from rater as rater2" +
+                  "        join rating as rating2" +
+                  "        on rating2.userid = rater2.userid" +
+                  "        where rater2.name='"+name+"'" +
+                  "    ) and username!='"+name+"'" +
+                  "    group by userid" +
+                  ")";
+          return getObjectList(sql);
+     }
+
+     public void upvoteByPK(int raterid) throws SQLException {
+          String sqlGetRep = "select * from rater where userid="+raterid+";";
           Rater rater = getObjectList(sqlGetRep).stream().findAny().orElse(null);
           int newRep = rater.getReputation() + 1;
           if (newRep>=100){
                return;
           }
-          String updateSQL = "update rater set reputation = "+ newRep + "where restaurantid="+restauid + " and raterid="+raterid+";";
+          String updateSQL = "update rater set reputation = "+ newRep + "where userid="+raterid+";";
           Statement st = connection.createStatement();
           st.executeUpdate(updateSQL);
      }
 
-     public void downvoteByPK(int restauid, int raterid) throws SQLException {
-          String sqlGetRep = "select * from rater where restaurantId="+restauid+ " and raterid="+raterid+";";
+     public void downvoteByPK(int raterid) throws SQLException {
+          String sqlGetRep = "select * from rater where userid="+raterid+";";
           Rater rater = getObjectList(sqlGetRep).stream().findAny().orElse(null);
           int newRep = rater.getReputation() - 1;
           if (newRep<=0){
                return;
           }
-          String updateSQL = "update rater set reputation = "+ newRep + "where restaurantid="+restauid + " and raterid="+raterid+";";
+          String updateSQL = "update rater set reputation = "+ newRep + "where userid="+raterid+";";
           Statement st = connection.createStatement();
           st.executeUpdate(updateSQL);
      }

@@ -8,11 +8,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.ValidationException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -66,7 +63,7 @@ public class RaterController {
           if (!validEmail) {
                throw new ValidationException("Email already exists");
           }
-          newUser.setReputation(0);
+          newUser.setReputation(50);
           raterDBService.insert(newUser);
           return newUser;
      }
@@ -88,7 +85,7 @@ public class RaterController {
 
      @RequestMapping(value=RequestMappings.LOWER_THAN_X, method = RequestMethod.GET)
      public List<Rater> lowerAverageThanRaterX(@RequestParam(value="raterName") String raterName) throws SQLException {
-          return raterDBService.ratersLowerAverageThanX(raterName);
+          return raterDBService.ratersLowerThanX(raterName);
      }
 
      @RequestMapping(value=RequestMappings.POLARIZING_RATINGS, method = RequestMethod.GET)

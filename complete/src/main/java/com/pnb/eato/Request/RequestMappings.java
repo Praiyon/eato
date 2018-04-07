@@ -24,9 +24,9 @@ public class RequestMappings {
     public static final String GETMENU = INDEX + "getmenu/";
 
     //RATER CONTROLLER
-    public static final String HIGHEST_FOOD_AND_MOOD = "hfam/";
-    public static final String HIGHEST_FOOD_OR_MOOD = "hfom/";
+    public static final String HIGHEST_FOOD_AND_MOOD = INDEX+"hfam/";
+    public static final String HIGHEST_FOOD_OR_MOOD =INDEX+ "hfom/";
     public static final String FREQUENT_RATERS = "freq-raters/";
-    public static final String LOWER_THAN_X = "avg-lower-than/";
-    public static final String POLARIZING_RATINGS = "polarizing/";
+    public static final String LOWER_THAN_X = INDEX+"lower-than/";
+    public static final String POLARIZING_RATINGS = INDEX+"polarizing/";
 }

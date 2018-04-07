@@ -21,14 +21,14 @@ public class RatingController {
     @Autowired
     RatingDBService ratingDBService;
 
-    @RequestMapping(value=RequestMappings.DOWNVOTE, method=RequestMethod.GET)
-    public void upvote(@RequestParam(value ="restid") int restauId, @RequestParam(value ="raterid") int raterId) throws SQLException {
-        raterService.upvoteByPK(restauId, raterId);
+    @RequestMapping(value=RequestMappings.UPVOTE, method=RequestMethod.GET)
+    public void upvote(@RequestParam(value ="raterid") int raterId) throws SQLException {
+        raterService.upvoteByPK(raterId);
     }
 
     @RequestMapping(value=RequestMappings.DOWNVOTE, method=RequestMethod.GET)
-    public void downvote(@RequestParam(value ="restid") int restauId, @RequestParam(value ="raterid") int raterId) throws SQLException {
-        raterService.downvoteByPK(restauId, raterId);
+    public void downvote(@RequestParam(value ="raterid") int raterId) throws SQLException {
+        raterService.downvoteByPK(raterId);
     }
 
     @RequestMapping(value=RequestMappings.RATE, method=RequestMethod.POST)
@@ -51,7 +51,8 @@ public class RatingController {
                                 rating.getStaff(),
                                 rating.getComments(),
                                 raterService.getUsernameById(rating.getUserID()),
-                                raterService.getRepById(rating.getUserID())
+                                raterService.getRepById(rating.getUserID()),
+                                rating.getUserID()
                         ));
                     } catch (SQLException e) {
                         e.printStackTrace();

@@ -6,10 +6,7 @@ import com.pnb.eato.Models.Rating;
 import com.pnb.eato.Models.RatingDisplay;
 import com.pnb.eato.Request.RequestMappings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,9 +21,19 @@ public class RatingController {
     @Autowired
     RatingDBService ratingDBService;
 
-    @RequestMapping(value="/upvote-rater", method=RequestMethod.GET)
+    @RequestMapping(value=RequestMappings.DOWNVOTE, method=RequestMethod.GET)
     public void upvote(@RequestParam(value ="restid") int restauId, @RequestParam(value ="raterid") int raterId) throws SQLException {
         raterService.upvoteByPK(restauId, raterId);
+    }
+
+    @RequestMapping(value=RequestMappings.DOWNVOTE, method=RequestMethod.GET)
+    public void downvote(@RequestParam(value ="restid") int restauId, @RequestParam(value ="raterid") int raterId) throws SQLException {
+        raterService.downvoteByPK(restauId, raterId);
+    }
+
+    @RequestMapping(value=RequestMappings.RATE, method=RequestMethod.POST)
+    public void postRate(@RequestBody Rating newRating) throws SQLException {
+        ratingDBService.insert(newRating);
     }
 
     @RequestMapping(value=RequestMappings.RATE, method= RequestMethod.GET)

@@ -1,8 +1,6 @@
 package com.pnb.eato.DatabaseTraverser;
 
 import com.pnb.eato.Models.Rater;
-import com.pnb.eato.Models.Rating;
-import com.pnb.eato.Models.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +13,85 @@ public class RaterDBService {
      @Autowired
      Connection connection;
 
+     //this is question k
+     public List<Rater> getHighestRatersFoodAndMood() throws SQLException {
+          String sql = "select rater.* " +
+                  "from rater, rating " +
+                  "where rater.userid = rating.userid " +
+                  "order by (food + mood) desc " +
+                  "limit 10;";
+          return getObjectList(sql);
+     }
+
+     //this is question l
+     public List<Rater> getHighestRatersFoodOrMood() throws SQLException {
+          String sql = "select rater.* " +
+                  "from rater, rating " +
+                  "where rater.userid = rating.userid " +
+                  "order by greatest(food,mood) desc " +
+                  "limit 10";
+          return getObjectList(sql);
+     }
+
+     //question m
+     public Rater mostMenuItemsRated(int restaurantId) throws SQLException {
+          String sql = "select * " +
+                  "from rater " +
+                  "where restaurantid ="+restaurantId+"" +
+                  "and userid = (" +
+                  "select userid " +
+                  "from rating_item " +
+                  "group by userid " +
+                  "order by count(userid) " +
+                  "limit 1" +
+                  ");";
+          return getObjectList(sql).stream().findAny().orElse(null);
+     }
+
+     //question o
+     public List<Rater> polarizingRaters() throws SQLException {
+          String sql = "select rater.* " +
+                  "from rater, rating " +
+                  "where rater.userid = rating.userid " +
+                  "order by @(food - mood) desc " +
+                  "limit 10;";
+          return getObjectList(sql);
+     }
+
+     //question n
+     public List<Rater> ratersLowerAverageThanX(String name) throws SQLException {
+          String sql = "select rater1.* " +
+                  "from rater as rater1 " +
+                  "join rating as rating1 " +
+                  "on rating1.userid = rater1.userid " +
+                  "where rating1.food + rating1.mood + rating1.price + rating1.staff < " +
+                  "(" +
+                  "select avg(rating2.food + rating2.mood + rating2.price + rating2.staff) " +
+                  "from rater as rater2 " +
+                  "join rating as rating2 " +
+                  "on rating2.userid = rater2.userid " +
+                  "where rater2.name='"+name+"'" +
+                  ");";
+          return getObjectList(sql);
+     }
+
      public void upvoteByPK(int restauid, int raterid) throws SQLException {
           String sqlGetRep = "select * from rater where restaurantId="+restauid+ " and raterid="+raterid+";";
-          Rater rater = getResultSet(sqlGetRep).stream().findAny().orElse(null);
+          Rater rater = getObjectList(sqlGetRep).stream().findAny().orElse(null);
           int newRep = rater.getReputation() + 1;
-          if (newRep>99){
+          if (newRep>=100){
+               return;
+          }
+          String updateSQL = "update rater set reputation = "+ newRep + "where restaurantid="+restauid + " and raterid="+raterid+";";
+          Statement st = connection.createStatement();
+          st.executeUpdate(updateSQL);
+     }
+
+     public void downvoteByPK(int restauid, int raterid) throws SQLException {
+          String sqlGetRep = "select * from rater where restaurantId="+restauid+ " and raterid="+raterid+";";
+          Rater rater = getObjectList(sqlGetRep).stream().findAny().orElse(null);
+          int newRep = rater.getReputation() - 1;
+          if (newRep<=0){
                return;
           }
           String updateSQL = "update rater set reputation = "+ newRep + "where restaurantid="+restauid + " and raterid="+raterid+";";
@@ -29,7 +101,7 @@ public class RaterDBService {
 
      public int getRepById(int id) throws SQLException {
           String sql ="select * from rater where userid="+id+";";
-          Rater rater = getResultSet(sql).stream().findFirst().orElse(null);
+          Rater rater = getObjectList(sql).stream().findFirst().orElse(null);
           if (rater != null){
                return rater.getReputation();
           }
@@ -38,7 +110,7 @@ public class RaterDBService {
 
      public String getUsernameById(int id) throws SQLException {
           String sql ="select * from rater where userid="+id+";";
-          Rater rater = getResultSet(sql).stream().findFirst().orElse(null);
+          Rater rater = getObjectList(sql).stream().findFirst().orElse(null);
           if (rater != null){
                return rater.getUsername();
           }
@@ -48,25 +120,25 @@ public class RaterDBService {
      public List<Rater>queryByNameAndType(String name, String type) throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
           sql += "name = '"+name +"' AND type = '" +type  +"'";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public List<Rater> queryByName(String name) throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
           sql += "name = '"+name+"';";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public List<Rater> queryByEmail(String email)  throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
           sql += "email = '"+email+"';";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public List<Rater> queryByUsername(String username)  throws SQLException {
           String sql = "SELECT * FROM RATER WHERE ";
           sql += "username = '"+username+"';";
-          return getResultSet(sql);
+          return getObjectList(sql);
      }
 
      public void insert(Rater toInsert) throws SQLException {
@@ -83,7 +155,7 @@ public class RaterDBService {
           st.executeUpdate(sql);
      }
 
-     private List<Rater> getResultSet(String sql) throws SQLException {
+     private List<Rater> getObjectList(String sql) throws SQLException {
           List<Rater> raterList = new ArrayList<>();
           Statement statement = connection.createStatement();
           ResultSet rs = statement.executeQuery(sql);

@@ -11,11 +11,12 @@ public class RatingDisplay {
     private String comments;
     private String username;
     private Integer reputation;
+    private Integer userid;
 
     public RatingDisplay() {
     }
 
-    public RatingDisplay(Date date, double price, double food, double mood, double staff, String comments, String username, Integer reputation) {
+    public RatingDisplay(Date date, double price, double food, double mood, double staff, String comments, String username, Integer reputation, Integer userid) {
         this.date = date;
         this.price = price;
         this.food = food;
@@ -24,6 +25,15 @@ public class RatingDisplay {
         this.comments = comments;
         this.username = username;
         this.reputation = reputation;
+        this.userid = userid;
+    }
+
+    public Integer getUserid() {
+        return userid;
+    }
+
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
     public Date getDate() {

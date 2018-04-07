@@ -88,14 +88,15 @@ public class RatingDBService {
                 "(userid, date, price, food, mood, staff, comments, restaurantid) "+
                 "values (" +
                 rating.getUserID() + ","+
-                "current_date" +
+                "current_date, " +
                 rating.getPrice() + ","+
                 rating.getFood() + ","+
                 rating.getMood() + ","+
                 rating.getStaff() + ","+
-                rating.getComments()+","+
+                "'"+rating.getComments()+"',"+
                 rating.getRestaurantId()+
                 ");";
+        System.out.println(sql);
         Statement st = con.createStatement();
         st.executeUpdate(sql);
     }

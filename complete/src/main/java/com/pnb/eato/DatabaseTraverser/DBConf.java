@@ -20,4 +20,11 @@ public class DBConf {
                   "postgres"
                   , "hoyaHOYA4!");
      }
+
+//     @Bean
+//     public Connection connection() throws SQLException {
+//          return DriverManager.getConnection("jdbc:postgresql://web0.site.uottawa.ca:15432/pkuma076",
+//                  "pkuma076"
+//                  , "hoyaHOYA4!");
+//     }
 }

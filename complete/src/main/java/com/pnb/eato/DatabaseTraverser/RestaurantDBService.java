@@ -81,4 +81,17 @@ public class RestaurantDBService {
           return restaurantList;
      }
 
+     public List<String> getCategories() throws SQLException {
+          String sql = "SELECT DISTINCT TYPE FROM RESTAURANT;";
+          List<String> categories = new ArrayList<>();
+          Statement statement = connection.createStatement();
+          ResultSet rs = statement.executeQuery(sql);
+
+          while(rs.next()){
+               String category = rs.getString("type");
+               categories.add(category);
+          }
+          return categories;
+     }
+
 }

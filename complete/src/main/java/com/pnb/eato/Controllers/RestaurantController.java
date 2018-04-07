@@ -80,6 +80,11 @@ public class RestaurantController {
         return restCardList;
     }
 
+    @RequestMapping(value= RequestMappings.CATEGORIES, method= RequestMethod.GET)
+    public List<String> getCategories() throws SQLException {
+        return restauService.getCategories();
+    }
+
 //    @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.GET)
 //    public List<Restaurant> restaurantGetByName() throws SQLException, ValidationException {
 //        List<Restaurant> restaurants = restauService.getAllRestaurants();

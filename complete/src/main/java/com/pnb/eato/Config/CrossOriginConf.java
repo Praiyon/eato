@@ -19,6 +19,11 @@ public class CrossOriginConf implements WebMvcConfigurer{
         registry.addMapping(RequestMappings.SIGNUP);
         registry.addMapping(RequestMappings.RATE);
         registry.addMapping(RequestMappings.TOTALRATINGREST);
+        registry.addMapping(RequestMappings.JANUARYREST);
+        registry.addMapping(RequestMappings.STAFFRATING);
+        registry.addMapping(RequestMappings.HIGHESTPRICE);
+        registry.addMapping(RequestMappings.MANAGERCATEGORY);
+        registry.addMapping(RequestMappings.CATEGORIES);
         registry.addMapping("/upvote-rater/");
         registry.addMapping("/downvote-rater/");
     }

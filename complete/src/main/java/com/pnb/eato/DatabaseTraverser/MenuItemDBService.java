@@ -17,6 +17,12 @@ public class MenuItemDBService {
     @Autowired
     Connection connection;
 
+    public List<MenuItem> getMenuItems(int restaurantId) throws SQLException{
+        String sql = "select * from menu_item " +
+                "where restaurantid = "+restaurantId;
+        return getObjectList(sql);
+    }
+
     private List<MenuItem> getObjectList(String sql) throws SQLException {
         List<MenuItem> menuItemList = new ArrayList<>();
         Statement statement = connection.createStatement();

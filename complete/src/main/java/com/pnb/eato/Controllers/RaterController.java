@@ -13,6 +13,7 @@ import javax.xml.bind.ValidationException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.util.List;
 
 @RestController
 public class RaterController {
@@ -70,12 +71,29 @@ public class RaterController {
           return newUser;
      }
 
-     @RequestMapping(value="/uli", method = RequestMethod.GET)
-     public int testPost(HttpServletRequest request) throws ValidationException {
-          if (request.getAttribute("uid") == null){
-               return -1;
-          } else {
-               return((int) request.getAttribute("uid"));
-          }
+     @RequestMapping(value=RequestMappings.HIGHEST_FOOD_AND_MOOD, method=RequestMethod.GET)
+     public List<Rater> highestRaterFAM() throws SQLException {
+          return raterDBService.getHighestRatersFoodAndMood();
      }
+
+     @RequestMapping(value=RequestMappings.HIGHEST_FOOD_OR_MOOD, method=RequestMethod.GET)
+     public List<Rater> highestRaterFOM() throws SQLException {
+          return raterDBService.getHighestRatersFoodOrMood();
+     }
+
+     @RequestMapping(value=RequestMappings.FREQUENT_RATERS, method=RequestMethod.GET)
+     public Rater freqRaters(@RequestParam(value="restId")int restaurantId) throws SQLException {
+          return raterDBService.mostMenuItemsRated(restaurantId);
+     }
+
+     @RequestMapping(value=RequestMappings.LOWER_THAN_X, method = RequestMethod.GET)
+     public List<Rater> lowerAverageThanRaterX(@RequestParam(value="raterName") String raterName) throws SQLException {
+          return raterDBService.ratersLowerAverageThanX(raterName);
+     }
+
+     @RequestMapping(value=RequestMappings.POLARIZING_RATINGS, method = RequestMethod.GET)
+     public List<Rater> polarizingRaters() throws SQLException {
+          return raterDBService.polarizingRaters();
+     }
+
 }

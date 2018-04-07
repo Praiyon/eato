@@ -14,6 +14,21 @@ public class RatingItemDBService {
     @Autowired
     Connection con;
 
+    //this is for question m
+    public List<RatingItem> mostFrequentRaterOfRestaurant(int restaurantId) {
+        String sql = "select * " +
+                "from rating_item " +
+                "where restaurantid = "+restaurantId +
+                " and userid = ( " +
+                "select userid " +
+                "from rating_item " +
+                "group by userid " +
+                "order by count(userid) " +
+                "limit 1" +
+                ");";
+        return null;
+    }
+
     private List<RatingItem> getObjectList(String sql) throws SQLException {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);

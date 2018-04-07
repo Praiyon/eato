@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import sun.misc.Request;
 
 @Configuration
 @EnableWebMvc
@@ -18,6 +19,7 @@ public class CrossOriginConf implements WebMvcConfigurer{
         registry.addMapping("/**");
         registry.addMapping(RequestMappings.SIGNUP);
         registry.addMapping(RequestMappings.RATE);
+        registry.addMapping(RequestMappings.LOCATION);
         registry.addMapping("/upvote-rater/");
         registry.addMapping("/downvote-rater/");
     }

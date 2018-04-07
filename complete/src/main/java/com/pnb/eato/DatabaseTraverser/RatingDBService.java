@@ -83,4 +83,21 @@ public class RatingDBService {
         st.executeUpdate(sql);
     }
 
+    public void insert(Rating rating) throws SQLException {
+        String sql = "insert into rating " +
+                "(userid, date, price, food, mood, staff, comments, restaurantid) "+
+                "values (" +
+                rating.getUserID() + ","+
+                "current_date" +
+                rating.getPrice() + ","+
+                rating.getFood() + ","+
+                rating.getMood() + ","+
+                rating.getStaff() + ","+
+                rating.getComments()+","+
+                rating.getRestaurantId()+
+                ");";
+        Statement st = con.createStatement();
+        st.executeUpdate(sql);
+    }
+
 }

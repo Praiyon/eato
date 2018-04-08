@@ -167,6 +167,17 @@ public class RaterDBService {
           st.executeUpdate(sql);
      }
 
+     public List<String> getAllRaterNames() throws SQLException {
+          List<String> nameList = new ArrayList<>();
+          String sql="select name from rater;";
+          Statement st = connection.createStatement();
+          ResultSet rs = st.executeQuery(sql);
+          while(rs.next()){
+               nameList.add(rs.getString("name"));
+          }
+          return nameList;
+     }
+
      private List<Rater> getObjectList(String sql) throws SQLException {
           List<Rater> raterList = new ArrayList<>();
           Statement statement = connection.createStatement();

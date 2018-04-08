@@ -22,4 +22,6 @@ public class MenuItemController {
     public List<MenuItem> getMenu(@RequestParam(value = "restId") int restaurantId) throws SQLException {
         return menuItemService.getMenuItems(restaurantId);
     }
+
+
 }

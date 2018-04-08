@@ -2,8 +2,11 @@ package com.pnb.eato.Controllers;
 
 import com.pnb.eato.DatabaseTraverser.RaterDBService;
 import com.pnb.eato.DatabaseTraverser.RatingDBService;
+import com.pnb.eato.DatabaseTraverser.RatingItemDBService;
+import com.pnb.eato.Models.MenuItem;
 import com.pnb.eato.Models.Rating;
 import com.pnb.eato.Models.RatingDisplay;
+import com.pnb.eato.Models.RatingItem;
 import com.pnb.eato.Request.RequestMappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +23,9 @@ public class RatingController {
 
     @Autowired
     RatingDBService ratingDBService;
+
+    @Autowired
+    RatingItemDBService ratingItemDBService;
 
     @RequestMapping(value=RequestMappings.UPVOTE, method=RequestMethod.GET)
     public void upvote(@RequestParam(value ="raterid") int raterId) throws SQLException {
@@ -60,6 +66,11 @@ public class RatingController {
                 }
         );
         return returnList;
+    }
+
+    @RequestMapping(value= RequestMappings.MENUITEMRATING, method= RequestMethod.GET)
+    public List<RatingItem> getMenuItemRating(@RequestParam(value = "id") int id) throws SQLException {
+        return (ratingItemDBService.getRatingItem(id));
     }
 
 }

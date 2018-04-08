@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class RatingItem {
     private Integer userId;
-    private Date date;
+    private String date;
     private Integer itemId;
     private int rating;
 
     public RatingItem(){}
 
-    public RatingItem(Integer userId, Date date, Integer itemId, int rating, String comment) {
+    public RatingItem(Integer userId, String date, Integer itemId, int rating, String comment) {
         this.userId = userId;
         this.date = date;
         this.itemId = itemId;
@@ -34,11 +34,11 @@ public class RatingItem {
         this.rating = rating;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

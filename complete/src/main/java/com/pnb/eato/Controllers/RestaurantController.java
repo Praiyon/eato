@@ -85,6 +85,11 @@ public class RestaurantController {
         return restauService.getCategories();
     }
 
+//    @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.POST)
+//    public List<String> getCategories() throws SQLException {
+//        return restauService.getCategories();
+    //}
+
 //    @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.GET)
 //    public List<Restaurant> restaurantGetByName() throws SQLException, ValidationException {
 //        List<Restaurant> restaurants = restauService.getAllRestaurants();

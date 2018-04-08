@@ -43,7 +43,7 @@ public class RatingItemDBService {
 
         while (rs.next()){
             int userId = rs.getInt("UserID");
-            Date date = rs.getDate("date");
+            String date = rs.getDate("date").toString();
             int itemId = rs.getInt("ItemID");
             int rating = rs.getInt("rating");
             String comment = rs.getString("comment");

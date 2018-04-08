@@ -38,8 +38,8 @@ public class ExtraQueryController {
      }
 
      @RequestMapping(value= RequestMappings.MANAGERCATEGORY, method= RequestMethod.GET)
-     public List<ManagerCategory> getManager(@RequestParam(value = "id", required = true) int id) throws SQLException, ValidationException {
-          List<ManagerCategory> managerCategories = extraQueryService.getManagerCategory(id);
+     public List<ManagerCategory> getManager(@RequestParam(value = "type", required = true) String type) throws SQLException, ValidationException {
+          List<ManagerCategory> managerCategories = extraQueryService.getManagerCategory(type);
           return managerCategories;
      }
 

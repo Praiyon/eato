@@ -95,13 +95,11 @@ public class ExtraQueryService {
 
      }
 
-     public List<ManagerCategory> getManagerCategory(int id) throws SQLException {
+     public List<ManagerCategory> getManagerCategory(String type) throws SQLException {
           String sql = "select location.manager_name, location.first_open_id, restaurant.name " +
                   "from location, restaurant " +
                   "where location.restaurantid = restaurant.restaurantid " +
-                  "and location.restaurantid = '"
-                  +id
-                  + "';";
+                  "and restaurant.type = '" +type+"';";
           List<ManagerCategory> list = new ArrayList<>();
           Statement statement = connection.createStatement();
           ResultSet rs = statement.executeQuery(sql);

@@ -1,6 +1,7 @@
 package com.pnb.eato.Controllers;
 
 import com.pnb.eato.DatabaseTraverser.RaterDBService;
+import com.pnb.eato.Models.RankingDisplays;
 import com.pnb.eato.Models.Rater;
 import com.pnb.eato.Request.RequestMappings;
 import com.pnb.eato.RequestBody.Login;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -69,13 +71,29 @@ public class RaterController {
      }
 
      @RequestMapping(value=RequestMappings.HIGHEST_FOOD_AND_MOOD, method=RequestMethod.GET)
-     public List<Rater> highestRaterFAM() throws SQLException {
-          return raterDBService.getHighestRatersFoodAndMood();
+     public List<RankingDisplays> highestRaterFAM() throws SQLException {
+          List<RankingDisplays> returnList = new ArrayList<>();
+          raterDBService.getHighestRatersFoodAndMood().stream().forEach(r->
+               returnList.add(new RankingDisplays(
+                       r.getName(),
+                       r.getJoinDate().toString(),
+                       r.getReputation()
+               ))
+          );
+          return returnList;
      }
 
      @RequestMapping(value=RequestMappings.HIGHEST_FOOD_OR_MOOD, method=RequestMethod.GET)
-     public List<Rater> highestRaterFOM() throws SQLException {
-          return raterDBService.getHighestRatersFoodOrMood();
+     public List<RankingDisplays> highestRaterFOM() throws SQLException {
+          List<RankingDisplays> returnList = new ArrayList<>();
+          raterDBService.getHighestRatersFoodOrMood().stream().forEach(r->
+                  returnList.add(new RankingDisplays(
+                          r.getName(),
+                          r.getJoinDate().toString(),
+                          r.getReputation()
+                  ))
+          );
+          return returnList;
      }
 
      @RequestMapping(value=RequestMappings.FREQUENT_RATERS, method=RequestMethod.GET)
@@ -89,8 +107,21 @@ public class RaterController {
      }
 
      @RequestMapping(value=RequestMappings.POLARIZING_RATINGS, method = RequestMethod.GET)
-     public List<Rater> polarizingRaters() throws SQLException {
-          return raterDBService.polarizingRaters();
+     public List<RankingDisplays> polarizingRaters() throws SQLException {
+          List<RankingDisplays> returnList = new ArrayList<>();
+          raterDBService.polarizingRaters().stream().forEach(r->
+               returnList.add(new RankingDisplays(
+                       r.getName(),
+                       r.getJoinDate().toString(),
+                       r.getReputation()
+               ))
+          );
+          return returnList;
+     }
+
+     @RequestMapping(value=RequestMappings.GET_ALL_RATERS, method = RequestMethod.GET)
+     public List<String> getRaterNames() throws SQLException {
+          return raterDBService.getAllRaterNames();
      }
 
 }

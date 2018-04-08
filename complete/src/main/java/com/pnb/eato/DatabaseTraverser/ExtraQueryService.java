@@ -133,16 +133,16 @@ public class ExtraQueryService {
      }
 
      public List<AverageRestCat> getAverageRestCat() throws SQLException {
-          String sql="select restaurant.type,menu_item.category, avg(menu_item.price) " +
-                  "from menu_item " +
+          String sql="select restaurant.type, menu_item.category, avg(menu_item.price) " +
+                  "from menu_item  " +
                   "join restaurant " +
                   "on restaurant.restaurantid = menu_item.restaurantid " +
                   "where restaurant.type in ( " +
-                  "    select rest2.type " +
-                  "    from restaurant as rest2 " +
-                  "    group by rest2.type " +
+                  "select restaurant2.type " +
+                  "    from restaurant as restaurant2 " +
                   ") " +
-                  "group by menu_item.category, restaurant.type;";
+                  "group by menu_item.category, restaurant.type " +
+                  "order by restaurant.type, menu_item.category;";
           List<AverageRestCat> list = new ArrayList<>();
           Statement statement = connection.createStatement();
           ResultSet rs = statement.executeQuery(sql);

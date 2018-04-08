@@ -39,6 +39,7 @@ public class RequestMappings {
     public static final String LOWER_THAN_X = INDEX+"lower-than/";
     public static final String POLARIZING_RATINGS = INDEX+"polarizing/";
     public static final String GET_ALL_RATERS = INDEX + "raternames/";
+    public static final String DELETE_CURRENT_USER = INDEX + "deleteuser/";
 
     //RATING ITEM CONTROLLER
     public static final String RATEITEM = INDEX+"rateitem/";

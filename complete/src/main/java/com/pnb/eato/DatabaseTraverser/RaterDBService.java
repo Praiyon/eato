@@ -4,6 +4,7 @@ import com.pnb.eato.Models.Rater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -199,4 +200,12 @@ public class RaterDBService {
           return raterList;
      }
 
+     public void deleteByID(int id) throws SQLException {
+          String sql = "delete from rating_item where userid=" + id + ";" +
+                  "delete from rating where userid=" + id + ";" +
+                  "delete from rater where userid=" + id + ";";
+
+          Statement st = connection.createStatement();
+          st.execute(sql);
+     }
 }

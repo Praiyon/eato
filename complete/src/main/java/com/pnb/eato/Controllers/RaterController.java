@@ -124,4 +124,9 @@ public class RaterController {
           return raterDBService.getAllRaterNames();
      }
 
+     @RequestMapping(value=RequestMappings.DELETE_CURRENT_USER, method = RequestMethod.GET)
+     public void deleteUser(@RequestParam(value="userid") int userid) throws SQLException {
+          raterDBService.deleteByID(userid);
+     }
+
 }

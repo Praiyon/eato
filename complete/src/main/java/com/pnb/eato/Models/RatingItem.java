@@ -7,6 +7,7 @@ public class RatingItem {
     private Date date;
     private Integer itemId;
     private int rating;
+    private String comment;
 
     public RatingItem(){}
 
@@ -58,5 +59,4 @@ public class RatingItem {
         this.comment = comment;
     }
 
-    private String comment;
-}
+   }

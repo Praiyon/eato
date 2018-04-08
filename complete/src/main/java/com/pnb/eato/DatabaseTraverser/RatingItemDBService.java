@@ -65,4 +65,17 @@ public class RatingItemDBService {
         Statement st = con.createStatement();
         st.executeUpdate(sql);
     }
+
+    public void insert(RatingItem ratingItem) throws SQLException {
+        String sql = "INSERT INTO RATING_ITEM (userid, date, itemid, rating, comment)" +
+                "VALUES(" +
+                ratingItem.getUserId() +","+
+                "CURRENT_DATE, "+
+                ratingItem.getItemId()+","+
+                ratingItem.getRating()+","+
+                "'" + ratingItem.getComment()+ "'"+
+                ");";
+        Statement st = con.createStatement();
+        st.executeUpdate(sql);
+    }
 }

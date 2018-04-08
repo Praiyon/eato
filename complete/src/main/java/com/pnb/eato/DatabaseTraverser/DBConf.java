@@ -15,7 +15,7 @@ public class DBConf {
      public Connection connection() throws SQLException {
           return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
                   "postgres"
-                  , "hoyaHOYA4!");
+                  , "1Gotclass97");
      }
 
 //     @Bean

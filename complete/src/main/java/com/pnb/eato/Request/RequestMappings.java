@@ -18,6 +18,7 @@ public class RequestMappings {
     public static final String TYPEHIGHESTFOOD = INDEX + "typehighestfood/";
     public static final String LOGIN = AUTH + "login/";
     public static final String SIGNUP = AUTH + "signup/";
+    public static final String MENUITEMRATING = INDEX + "menuitemid";
 
 //    RESTAURANT CONTROLLER
     public static final String RESTAU = INDEX + "restau/";

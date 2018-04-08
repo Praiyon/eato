@@ -29,6 +29,13 @@ public class RatingItemDBService {
         return null;
     }
 
+    public List<RatingItem> getRatingItem(int menuItemId) throws SQLException {
+        String sql = "SELECT * " +
+                "FROM RATING_ITEM " +
+                "WHERE RATING_ITEM.ITEMID='" +menuItemId + "'";
+        return getObjectList(sql);
+    }
+
     private List<RatingItem> getObjectList(String sql) throws SQLException {
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(sql);

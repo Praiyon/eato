@@ -60,7 +60,7 @@ public class ExtraQueryService {
      }
 
      public List<StaffRating> getStaffRatingLower(String name) throws SQLException {
-          String sql = "SELECT REST.NAME, LOCATION.FIRST_OPEN_ID, RAT " +
+          String sql = "SELECT DISTINCT REST.NAME, LOCATION.FIRST_OPEN_ID, RAT " +
                   "FROM RESTAURANT AS REST " +
                   "JOIN " +
                   "RATING AS RAT " +
@@ -156,14 +156,14 @@ public class ExtraQueryService {
      }
 
      public List<TypeHighestFood> getTypeHighestFood(String type) throws SQLException {
-          String sql = "SELECT REST.NAME, RATER.NAME " +
+          String sql = "SELECT REST.NAME as restaurantname, RATER.NAME as ratername " +
                   "FROM RESTAURANT AS REST " +
                   "JOIN RATING ON RATING.RESTAURANTID=REST.RESTAURANTID " +
                   "JOIN RATER ON RATING.USERID=RATER.USERID " +
                   "WHERE REST.TYPE='" + type + "' and RATING.FOOD=( " +
                   "SELECT MAX(RAT.FOOD) " +
-                  "    FROM LOCATION AS LOCA, RATING AS RAT, RESTAURANT AS RESTA " +
-                  "    WHERE LOCA.RESTAURANTID=RESTA.RESTAURANTID AND RAT.RESTAURANTID=RESTA.RESTAURANTID) ";
+                  "    FROM RATING AS RAT, RESTAURANT AS RESTA " +
+                  "    WHERE RAT.RESTAURANTID=RESTA.RESTAURANTID) ";
 
           List<TypeHighestFood> list = new ArrayList<>();
           Statement statement = connection.createStatement();

@@ -22,6 +22,7 @@ public class RequestMappings {
 
 //    RESTAURANT CONTROLLER
     public static final String RESTAU = INDEX + "restau/";
+    public static final String DELETERESTAU = INDEX + "deleterestau";
 
 
     //ratings controller

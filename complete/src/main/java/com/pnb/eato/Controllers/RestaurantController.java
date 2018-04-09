@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -85,12 +86,14 @@ public class RestaurantController {
         return restauService.getCategories();
     }
 
-//    @RequestMapping(value= RequestMappings.RESTAU, method= RequestMethod.GET)
-//    public List<Restaurant> restaurantGetByName() throws SQLException, ValidationException {
-//        List<Restaurant> restaurants = restauService.getAllRestaurants();
-//        if (restaurants == null){
-//            throw new ValidationException("oh no!");
-//        }
-//        return restaurants;
-//    }
+    @RequestMapping(value=RequestMappings.DELETERESTAU, method=RequestMethod.DELETE)
+    public void deleteRestau (@RequestParam(value="restauid")int restauid) throws SQLException {
+
+        try {
+            restauService.deleteByID(restauid);
+        } catch (SQLException e) {
+            throw new SQLException("something went wrong with the database");
+        }
+
+    }
 }

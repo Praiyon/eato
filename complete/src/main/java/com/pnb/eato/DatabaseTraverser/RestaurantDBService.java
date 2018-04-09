@@ -94,4 +94,27 @@ public class RestaurantDBService {
           return categories;
      }
 
+     public void deleteByID(int id) throws SQLException {
+          String sql = "delete * " +
+                  "from rating_item " +
+                  "where id in ( " +
+                  "   select * " +
+                  "   from menu_item " +
+                  "   where restaurantid="+id+
+                  ");" +
+                  "delete * " +
+                  "from menu_item " +
+                  "where restaurantid="+id+"; " +
+                  "delete * " +
+                  "from rating " +
+                  "where restaurantid="+id+"; " +
+                  "delete * " +
+                  "from restaurant " +
+                  "where id = "+id+";";
+          Statement st = connection.createStatement();
+          st.execute(sql);
+     }
+
+
+
 }

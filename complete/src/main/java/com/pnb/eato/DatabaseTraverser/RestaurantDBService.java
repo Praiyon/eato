@@ -16,11 +16,12 @@ public class RestaurantDBService {
      @Autowired
      Connection connection;
 
-     public void insertRestaurant (String name,
-                                   String type,
-                                   String url ) throws SQLException {
-          String sql = "INSERT INTO RESTAURANT (NAME, TYPE, URL) VALUES " +
-                  "('" + name + "','" + type + "','" + url + "');";
+     public void insertRestaurant (Restaurant restaurant) throws SQLException {
+
+          String sql = "INSERT INTO RESTAURANT (NAME, TYPE, URL, FOOD_PIC, LOGO) VALUES " +
+                  "('" + restaurant.getName() + "','" + restaurant.getType()
+                  + "','" + restaurant.getUrl() + "','" + restaurant.getUrlPic()  +
+                  "','" + restaurant.getUrlLogo() + "');";
           Statement statement;
           statement = connection.createStatement();
           statement.executeUpdate(sql);
@@ -95,22 +96,22 @@ public class RestaurantDBService {
      }
 
      public void deleteByID(int id) throws SQLException {
-          String sql = "delete * " +
+          String sql = "delete " +
                   "from rating_item " +
-                  "where id in ( " +
-                  "   select * " +
+                  "where "+ id + "  in ( " +
+                  "   select restaurantid " +
                   "   from menu_item " +
                   "   where restaurantid="+id+
                   ");" +
-                  "delete * " +
+                  "delete " +
                   "from menu_item " +
                   "where restaurantid="+id+"; " +
-                  "delete * " +
+                  "delete " +
                   "from rating " +
                   "where restaurantid="+id+"; " +
-                  "delete * " +
+                  "delete " +
                   "from restaurant " +
-                  "where id = "+id+";";
+                  "where restaurantid = "+id+";";
           Statement st = connection.createStatement();
           st.execute(sql);
      }

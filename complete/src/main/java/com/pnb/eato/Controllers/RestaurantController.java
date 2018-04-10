@@ -2,14 +2,12 @@ package com.pnb.eato.Controllers;
 
 import com.pnb.eato.DatabaseTraverser.RatingDBService;
 import com.pnb.eato.DatabaseTraverser.RestaurantDBService;
+import com.pnb.eato.Models.Rating;
 import com.pnb.eato.Models.Restaurant;
 import com.pnb.eato.Request.RequestMappings;
 import com.pnb.eato.RequestBody.RestaurantCard;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.ValidationException;
@@ -86,7 +84,7 @@ public class RestaurantController {
         return restauService.getCategories();
     }
 
-    @RequestMapping(value=RequestMappings.DELETERESTAU, method=RequestMethod.DELETE)
+    @RequestMapping(value=RequestMappings.DELETERESTAU, method=RequestMethod.GET)
     public void deleteRestau (@RequestParam(value="restauid")int restauid) throws SQLException {
 
         try {
@@ -96,4 +94,10 @@ public class RestaurantController {
         }
 
     }
+
+    @RequestMapping(value=RequestMappings.RESTAU, method=RequestMethod.POST)
+    public void postRestaurant(@RequestBody Restaurant restaurant) throws SQLException {
+        restauService.insertRestaurant(restaurant);
+    }
+
 }

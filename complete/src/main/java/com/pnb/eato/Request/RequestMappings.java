@@ -44,4 +44,6 @@ public class RequestMappings {
 
     //RATING ITEM CONTROLLER
     public static final String RATEITEM = INDEX+"rateitem/";
+
+    public static final String DELETE_MENU_ITEM = INDEX +"deletemenuitem/";
 }

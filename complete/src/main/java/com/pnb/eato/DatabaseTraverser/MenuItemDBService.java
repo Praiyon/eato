@@ -54,4 +54,11 @@ public class MenuItemDBService {
         Statement st = connection.createStatement();
         st.executeUpdate(sql);
     }
+
+    public void delete (int id ) throws SQLException {
+        String sql = "delete from rating_item where itemid="+id+";"+
+                "delete from menu_item where itemid="+id+";";
+        Statement st = connection.createStatement();
+        st.execute(sql);
+    }
 }

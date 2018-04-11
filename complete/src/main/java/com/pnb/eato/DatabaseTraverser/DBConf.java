@@ -13,8 +13,8 @@ public class DBConf {
 
      @Bean
      public Connection connection() throws SQLException {
-          return DriverManager.getConnection("jdbc:postgresql://web0.site.uottawa.ca:15432/pkuma076",
-                  "pkuma076"
+          return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres",
+                  "postgres"
                   , "hoyaHOYA4!");
      }
 }

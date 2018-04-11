@@ -49,7 +49,7 @@ public class RestaurantDBService {
           String sql = "SELECT * FROM RESTAURANT WHERE ";
           String[] likeWords = name.split(" ");
           for (int i = 0 ; i < likeWords.length; i++){
-               sql += "name like '%" +likeWords[i]+"%' ";
+               sql += "lower(name) like lower('%" +likeWords[i]+"%') ";
                if (i != likeWords.length - 1) {
                     sql+= "AND ";
                }
@@ -96,7 +96,8 @@ public class RestaurantDBService {
      }
 
      public void deleteByID(int id) throws SQLException {
-          String sql = "delete " +
+          String sql = "delete from location where restaurantid="+id+";"+
+                  "delete " +
                   "from rating_item " +
                   "where "+ id + "  in ( " +
                   "   select restaurantid " +

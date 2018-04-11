@@ -39,6 +39,7 @@ public class CrossOriginConf implements WebMvcConfigurer{
         registry.addMapping(RequestMappings.HIGHEST_FOOD_AND_MOOD);
         registry.addMapping(RequestMappings.HIGHESTPRICE);
         registry.addMapping(RequestMappings.DELETE_CURRENT_USER);
+        registry.addMapping(RequestMappings.DELETE_MENU_ITEM);
 
     }
 }

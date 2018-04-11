@@ -23,5 +23,10 @@ public class MenuItemController {
         return menuItemService.getMenuItems(restaurantId);
     }
 
+    @RequestMapping(value =RequestMappings.DELETE_MENU_ITEM, method=RequestMethod.GET)
+    public void deleteItem(@RequestParam(value="itemid")int id) throws SQLException {
+        menuItemService.delete(id);
+    }
+
 
 }
